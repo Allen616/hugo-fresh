@@ -4,6 +4,10 @@ title: Hugo Fresh Theme
 theme: hugo-fresh
 
 params:
+  siteColors: 
+    primary: FF00000 #default is 4FC1EA
+    secondary: FF00000 #default is #F39200
+    accent: FF00000 #default is 00efb7
   navbarlogo:
   # Logo (from static/images/logos/___)
    image: logos/fresh.svg
