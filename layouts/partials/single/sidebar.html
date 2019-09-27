@@ -10,7 +10,7 @@
     <ul class="sidebar-menu">
       {{ range where .Site.RegularPages "Section" (strings.TrimSuffix "/" .Dir) }}
       <li>
-        <a href="{{ .URL }}">
+        <a href="{{ .Permalink }}">
           {{ .Title }}
         </a>
       </li>
