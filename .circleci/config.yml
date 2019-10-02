@@ -64,6 +64,7 @@ jobs:
           command: |
             cat themes/hugo-fresh/assets/fresh/partials/_sections.scss
             hugo
+            cat public/css/style*
 
       - run:
           name: Create now.json
