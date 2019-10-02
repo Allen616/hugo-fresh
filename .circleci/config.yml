@@ -61,7 +61,9 @@ jobs:
       - run:
           name: Create hugo site
           working_directory: my-site
-          command: hugo
+          command: |
+            cat themes/hugo-fresh/assets/fresh/partials/_sections.scss
+            hugo
 
       - run:
           name: Create now.json
