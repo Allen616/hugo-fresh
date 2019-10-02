@@ -31,7 +31,7 @@ jobs:
               echo "Hello World else $CIRCLE_BRANCH"
               git checkout ${CIRCLE_BRANCH}
             fi
-            cat themes/hugo-fresh/assets/fresh/partials/_sections.scss
+            cat assets/fresh/partials/_sections.scss
 
       - run:
           name: Replace default config
