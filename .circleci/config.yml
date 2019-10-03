@@ -31,6 +31,7 @@ jobs:
               echo "Hello World else $CIRCLE_BRANCH"
               git checkout ${CIRCLE_BRANCH}
             fi
+            cat assets/fresh/partials/_sections.scss
 
       - run:
           name: Replace default config
@@ -60,7 +61,10 @@ jobs:
       - run:
           name: Create hugo site
           working_directory: my-site
-          command: hugo
+          command: |
+            cat themes/hugo-fresh/assets/fresh/partials/_sections.scss
+            hugo
+            cat public/css/style*
 
       - run:
           name: Create now.json
@@ -75,13 +79,9 @@ jobs:
       - run:
           name: Install now CLI
           command: |
-            apk add wget
-            wget -q https://github.com/zeit/now-cli/releases/download/15.4.0/now-alpine.gz
-            apk add gzip
-            gunzip now-alpine.gz
-            chmod a+x now-alpine
-            mv now-alpine /usr/local/bin/now
-            apk add libstdc++ libgcc
+            apk add --update npm
+            npm config set unsafe-perm true
+            npm install -g now@16.3.0
       - run:
           name: Publish to now.sh
           working_directory: my-site/public
