@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: alpine:3.9.2
+      - image: alpine:3.10.2
 
     steps:
       - run:
@@ -22,14 +22,16 @@ jobs:
       - run:
           working_directory: my-site/themes/hugo-fresh
           command: |
+            set +e
             isPrIfGreaterThanZero=$(expr $CIRCLE_BRANCH : "pull")
-            if [ isPrIfGreaterThanZero > 0 ]; then
+            echo $isPrIfGreaterThanZero
+            if [ "$isPrIfGreaterThanZero" -gt "0" ]; then
               echo "Hello World $CIRCLE_BRANCH"
               git fetch origin ${CIRCLE_BRANCH}/head:BRANCHNAME
               git checkout BRANCHNAME
             else
               echo "Hello World else $CIRCLE_BRANCH"
-              git checkout ${CIRCLE_BRANCH}
+              git checkout $CIRCLE_BRANCH
             fi
             cat assets/fresh/partials/_sections.scss
 
@@ -37,8 +39,10 @@ jobs:
           name: Replace default config
           working_directory: my-site
           command: |
+            set +e
             isPrIfGreaterThanZero=$(expr $CIRCLE_BRANCH : "pull")
-            if [ isPrIfGreaterThanZero > 0 ]; then
+            echo $isPrIfGreaterThanZero
+            if [ "$isPrIfGreaterThanZero" -gt "0" ]; then
               branch=${CIRCLE_SHA1}
             else
               branch=${CIRCLE_BRANCH}
